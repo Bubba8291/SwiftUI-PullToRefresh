@@ -51,14 +51,20 @@ class RefreshData: ObservableObject {
 public struct RefreshableNavigationView<Content: View>: View {
     let content: () -> Content
     let action: () -> Void
+    let navigationBarTitleDisplayMode: NavigationBarItem.TitleDisplayMode
     private var title: String
     @Binding var isDone: Bool
 
     @ObservedObject var data: RefreshData
 
-    public init(title:String, action: @escaping () -> Void,isDone: Binding<Bool> ,@ViewBuilder content: @escaping () -> Content) {
+    public init(
+        title:String, action: @escaping () -> Void,
+        isDone: Binding<Bool>,
+        navigationBarTitleDisplayMode: NavigationBarItem.TitleDisplayMode,
+        @ViewBuilder content: @escaping () -> Content) {
         self.title = title
         self.action = action
+        self.navigationBarTitleDisplayMode = navigationBarTitleDisplayMode
         self.content = content
         self._isDone = isDone
         self.data = RefreshData(isDone: isDone)
@@ -75,7 +81,7 @@ public struct RefreshableNavigationView<Content: View>: View {
         NavigationView{
             RefreshableList(data: data, action: self.action) {
                 self.content()
-            }.navigationBarTitle(title)
+            }.navigationBarTitle(Text(title), displayMode: self.navigationBarTitileDisplayMode)
         }
     }
 }
@@ -250,3 +256,4 @@ struct Spinner_Previews: PreviewProvider {
         Spinner(percentage: .constant(1))
     }
 }
+
