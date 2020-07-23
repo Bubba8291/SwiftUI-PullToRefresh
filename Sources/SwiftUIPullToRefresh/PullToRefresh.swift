@@ -82,7 +82,7 @@ public struct RefreshableNavigationView<Content: View>: View {
         NavigationView{
             RefreshableList(data: data, action: self.action) {
                 self.content()
-            }.navigationBarTitle(Text(title), displayMode: self.navigationBarTitileDisplayMode)
+            }.navigationBarTitle(Text(title), displayMode: self.navigationBarTitleDisplayMode)
         }
     }
 }
