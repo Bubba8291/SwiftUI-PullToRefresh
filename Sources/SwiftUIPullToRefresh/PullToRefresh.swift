@@ -57,12 +57,7 @@ public struct RefreshableNavigationView<Content: View>: View {
 
     @ObservedObject var data: RefreshData
 
-    public init(
-        title:String,
-        action: @escaping () -> Void,
-        isDone: Binding<Bool>,
-        navigationBarTitleDisplayMode: NavigationBarItem.TitleDisplayMode,
-        @ViewBuilder content: @escaping () -> Content) {
+    public init(title:String, action: @escaping () -> Void, isDone: Binding<Bool>, navigationBarTitleDisplayMode: NavigationBarItem.TitleDisplayMode, @ViewBuilder content: @escaping () -> Content) {
         self.title = title
         self.action = action
         self.navigationBarTitleDisplayMode = navigationBarTitleDisplayMode
